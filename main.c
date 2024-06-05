@@ -14,8 +14,8 @@ int main(void) {
         return 1;
     }
 
-    while (1) {
-        fgets(vector, 100, file);
+    while (fgets(vector, 100, file) != NULL) {
+        // fgets(vector, 100, file);
         // printf("%s", vector);
         i++;
     }
