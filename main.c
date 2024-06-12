@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include<stdlib.h>
+#include <stdlib.h>
 
 int main(void) {
 
@@ -9,9 +9,10 @@ int main(void) {
     char measurement[100];
     char *city;
     char *temperature;
-    int i = 1;
-    float temps = 0;
-    float mean_temp;
+    int i = 0;
+    int j = 0;
+    char selected[100] = "Hamburg";
+    float mean;
 
     // open file
     file = fopen("/Users/artako/CLionProjects/billion_line/measurements.txt", "r");
@@ -24,34 +25,37 @@ int main(void) {
 
     // raed the file line by line
     while (fgets(measurement, 100, file) != NULL) {
+    // while (i <= 10000) {
+
+        // fgets(measurement, 100, file);
 
         // city selection
         city = strtok(measurement, ";");
-        if (strcmp(city, "Rome") == 0) {
+        if (strcmp(city, selected) == 0) {
 
             // temperature readings for selected city
             temperature = strtok(NULL, "NULL");
             // printf("%s\n", temperature);
 
             // summation of temperature readings
-            temps += strtof(temperature, NULL);
+            mean += strtof(temperature, NULL);
             // printf("%f\n", temps);
+
+            // count city occurrences
+            j++;
         }
 
-        // loop cancellation
+        // count number of rows
         i++;
     }
 
-    // number of lines in input file
-    // printf("%d\n", i-1);
+    printf("Total number of rows: %d\n", i);
+    printf("Number of city occurrences: %d\n", j);
+    printf("Selected city: %s\n", selected);
 
-    // mean temperature for selected city
-    mean_temp = temps/i;
-
-    printf("Rome\n");
-    printf("%f\n", mean_temp);
-
-    // 1.078057
+    // mean temperature of selected city
+    mean = mean / j;
+    printf("Mean temperature: %f\n", mean);
 
     // close file
     fclose(file);
