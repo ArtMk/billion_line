@@ -13,9 +13,7 @@ int main(void) {
     int j = 0;
     char selected[100] = "Rome";
     float T;
-    float mean;
-    float min = 0;
-    float max = 0;
+    float temp_arr[] = {0, 0, 0};
 
     // open file
     file = fopen("/Users/artako/CLionProjects/billion_line/measurements.txt", "r");
@@ -44,18 +42,18 @@ int main(void) {
             T = strtof(temperature, NULL);
 
             // summation of temperature readings
-            mean += T;
+            temp_arr[2] += T;
             // printf("%f\n", temps);
 
             // count city occurrences
             j++;
 
-            if (T < min) {
-                min = T;
+            if (T < temp_arr[0]) {
+                temp_arr[0] = T;
             }
 
-            if (T > max) {
-                max = T;
+            if (T > temp_arr[1]) {
+                temp_arr[1] = T;
             }
         }
 
@@ -70,11 +68,11 @@ int main(void) {
     printf("Selected city: %s\n", selected);
     printf("\n");
 
-    mean = mean / j;
-    printf("Maximum temperature:  %.1f\n", max);
-    printf("Minimum temperature: %.1f\n", min);
+    temp_arr[2] = temp_arr[2] / j;
+    printf("Maximum temperature:  %.1f\n", temp_arr[1]);
+    printf("Minimum temperature: %.1f\n", temp_arr[0]);
     printf("----------------------------\n");
-    printf("Mean temperature:     %.1f\n", mean);
+    printf("Mean temperature:     %.1f\n", temp_arr[2]);
     // close file
     fclose(file);
 
